@@ -1,0 +1,9 @@
+*.log
+*.sock
+.settings
+.projectt
+*.DS_Store
+example/node_modules/*
+*.idea*
+*.iml
+*.module*

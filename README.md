@@ -1,17 +1,17 @@
-#ROAD.JS 
+#ROAD
 
- helper for expressjs.
+A route helper for expressjs that allows you to have specific controllers mapping to their corresponding views by following logical conventions. See example application for use cases. You need express, and ejs available to run the example.
 
-##Features
+##TODO
 
-   * Specify routes in a separate file (routes.js)
-   * Wire your controller to your corresponding views using convention
+	* NPM package
+
 
 ##License
 
 (The MIT License)
 
-Copyright (c) 2011-2012 Kishore Nallan  <kishore@kishorelive.com>
+Copyright (c) 2011 Kishore Nallan  <kishore@kishorelive.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
