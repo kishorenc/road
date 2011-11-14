@@ -1,6 +1,6 @@
 #Road
 
-A route helper for express that allows you to have map routes, controllers and views by following logical conventions. See example application for use cases. You need express, and ejs available to run the example.
+A route helper for express that allows you to map routes, controllers and views by following logical conventions. See example application for use cases. You need express and ejs available to run the example.
 
 ##Installation
 
