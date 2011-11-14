@@ -1,11 +1,23 @@
-#ROAD
+#Road
 
-A route helper for expressjs that allows you to have specific controllers mapping to their corresponding views by following logical conventions. See example application for use cases. You need express, and ejs available to run the example.
+A route helper for express that allows you to have map routes, controllers and views by following logical conventions. See example application for use cases. You need express, and ejs available to run the example.
 
-##TODO
+##Installation
 
-	* NPM package
+	npm install road
 
+##Features
+
+	* Wire your routes to individual controllers and views
+	* Define custom routes which map custom URLs to specific controller methods
+	* Serve the views in custom MIME types
+
+See example application for complete use cases.
+
+##Todo
+
+	* Better documentation (though example app covers ample ground)
+	* Tests
 
 ##License
 

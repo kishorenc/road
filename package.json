@@ -1,0 +1,26 @@
+{
+    "name": "road",
+    "version": "0.0.2",
+    "description": "A route helper for express.",
+    "homepage": "https://github.com/kishorenc/road",
+    "author": "Kishore Nallan <kishore@kishorelive.com>",
+    "contributors": [
+        "Kishore Nallan <kishore@kishorelive.com>"
+    ],
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/kishorenc/road"
+    },
+    "bugs":
+    {
+        "mail": "kishore@kishorelive.com",
+        "url": "https://github.com/kishorenc/road/issues"
+    },
+    "main": "index.js",
+    "engines": { "node": ">=0.4.0" },
+    "licenses" :
+    [
+        { "type" : "MIT", "url" : "https://raw.github.com/kishorenc/road/master/LICENSE" }
+    ]
+}

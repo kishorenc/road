@@ -1,18 +1,22 @@
 /*
 *	Sample app showcasing road
-*       Make sure you have express, and ejs installed to run the example
+*   Make sure you have express, ejs, and (of course) road installed to run the example
 */
 
-var express = require('express')
-    ,road = require('./road');
+var express = require('express'),
+	app = express.createServer();
 
-var app = express.createServer();
+var road = require('road');
 
-road.configure('ejs','routes');
+// configure road by specifying: the view engine, application root, and the routes (see routes.js)
+road.configure('ejs', __dirname, require('./routes'));
+
 app.configure(function() {
 	app.use(express.static(__dirname+'/public'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
+
+	// use road to handle the routes this way:
     app.use(express.router(road.router));
 });
 
