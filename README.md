@@ -8,16 +8,88 @@ A route helper for express that allows you to map routes, controllers and views 
 
 ##Features
 
-	* Wire your routes to individual controllers and views
-	* Define custom routes which map custom URLs to specific controller methods
+	* Wire your routes to individual controllers and views using convention
 	* Serve the views in custom MIME types
-
+	* Define custom routes which map custom URLs to specific controller methods
+	
 See example application for complete use cases.
 
-##Todo
+#Quick Start
 
-	* Better documentation (though example app covers ample ground)
-	* Tests
+Integrating Road with your Express application is really simple. You need a simple route file with atleast the default route defined in your application root.
+
+	// routes.js (place this in your application root)
+	module.exports = [
+		['all', '/:controller?/:action?/:id?'] // default route
+	];
+
+Tell express to let Road handle the routing this way:
+
+	var road = require('road');
+
+	// configure road (view engine, app root, and route module)
+	road.configure('ejs', __dirname, require('./routes'));
+
+    app.use(express.router(road.router));
+
+Road, by convention, expects you to drop your controllers into the `controllers` folder in your application root. 
+
+	/controllers
+		/indexController.js
+		/eventsController.js
+
+You can export your controller methods which automatically get mapped by road, again using convention:
+
+	// eventsController.js
+
+	// maps to: events/index or just events/
+	this.index = function(conn, callback) {
+    	callback('plain text');
+	}
+
+	// maps to events/foo/ or events/foo/:id
+	this.foo = function(conn, callback) {
+		callback('foo as plain text with optional id ' + conn.req.params.id);
+	}
+
+You can access the request and response object by using `conn.req` and `conn.res`. 
+
+	this.bar = function(conn, callback) {
+		callback(conn.req.params.id);
+	}
+
+The `callback` parameter allows you to serve your views in a number of easy ways:
+
+	// serving a view with dynamic content
+	this.dynamicView = function(conn, callback) {
+	    callback(['dynamic',{name: "Road.js"}]);
+	}
+
+	// serving view with custom MIME type (default is text/html)
+	this.dynamicViewAsPlainText = function(conn, callback) {
+	    callback(['dynamic', {name:'Road.js'}], 'text/plain');
+	}
+
+	// serving plain text
+	this.plainText = function(conn, callback) {
+	    callback('Plain text served as text/plain');
+	}
+
+	// more use cases in example app
+
+
+Road also supports custom routes.
+
+	// routes.js
+	module.exports = [
+		
+		// routes `/path/to/foo` to `show()` method in `fooController`
+		['map', 'get', '/path/to/foo', 'foo', 'show'],
+
+		// default route
+		['all', '/:controller?/:action?/:id?']
+	];
+
 
 ##License
 
