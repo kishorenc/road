@@ -77,6 +77,14 @@ The `callback` parameter allows you to serve your views in a number of easy ways
 
 	// more use cases in example app
 
+Place your views in `/views` in app root. Each controller gets its own sub-directory inside `views`. For example, if you have a `show` method in your `fooController.js`, accessing `foo/show` will make Road look for the template file `views/foo/show.ejs`.
+
+	/controllers
+		/fooController.js
+
+	/views
+		/foo
+			/show.ejs
 
 Road also supports custom routes.
 
