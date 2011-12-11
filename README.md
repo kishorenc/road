@@ -89,7 +89,7 @@ Road also supports custom routes.
 	// routes.js
 	module.exports = [
 		
-		// routes `/path/to/foo` to `show()` method in `fooController`
+		// routes `/path/to/foo` to `get_show()` method in `fooController`
 		['map', 'get', '/path/to/foo', 'foo', 'show'],
 
 	];
