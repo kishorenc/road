@@ -16,21 +16,19 @@ See example application for complete use cases.
 
 #Quick Start
 
-Integrating Road with your Express application is really simple. You need a route file defined in your application root.
+Integrating Road with your Express application is really simple. You need an empty route file defined in your application root.
 
 	// routes.js (place this in your application root)
-	module.exports = [
-		['map', 'get', '/testControllerShowMethod', 'index', 'custom'] // optional, this can be just empty
-	];
+	module.exports = [];
 
 Tell express to let Road handle the routing this way:
 
 	var road = require('road');
 
-	// configure road (view engine, app root, and route module)
-	road.configure('ejs', __dirname, require('./routes'));
+	// configure road by specifying the view engine and the routes
+	road.configure('ejs', require('./routes'));
 
-	// mount routes using road
+	// mount application routes using road
 	road.router(app);
 
 Road, by convention, expects you to drop your controllers into the `controllers` folder in your application root. 
@@ -94,8 +92,6 @@ Road also supports custom routes.
 		// routes `/path/to/foo` to `show()` method in `fooController`
 		['map', 'get', '/path/to/foo', 'foo', 'show'],
 
-		// default route
-		['all', '/:controller?/:action?/:id?']
 	];
 
 ##Todo
