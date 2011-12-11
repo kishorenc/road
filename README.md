@@ -30,7 +30,8 @@ Tell express to let Road handle the routing this way:
 	// configure road (view engine, app root, and route module)
 	road.configure('ejs', __dirname, require('./routes'));
 
-    app.use(express.router(road.router));
+	// mount routes using road
+	road.router(app);
 
 Road, by convention, expects you to drop your controllers into the `controllers` folder in your application root. 
 
@@ -38,40 +39,39 @@ Road, by convention, expects you to drop your controllers into the `controllers`
 		/indexController.js
 		/eventsController.js
 
-You can export your controller methods which automatically get mapped by road, again using convention:
+You can export your controller functions which automatically get mapped by road, again using convention. Every controller function needs to be prefixed with the HTTP method it's handling. For example, functions which are serving GET requests, need to be prefixed with 'get_', like this:
 
 	// eventsController.js
 
-	// maps to: events/index or just events/
-	this.index = function(conn, callback) {
+	// maps to: GET events/index or, just GET events/
+	this.get_index = function(req, res, callback) {
     	callback('plain text');
 	}
 
-	// maps to events/foo/ or events/foo/:id
-	this.foo = function(conn, callback) {
-		callback('foo as plain text with optional id ' + conn.req.params.id);
+	// maps to: GET events/foo/ or, GET events/foo/:id
+	this.get_foo = function(req, res, callback) {
+		callback('foo as plain text with optional id ' + req.params.id);
 	}
 
-You can access the request and response object by using `conn.req` and `conn.res`. 
-
-	this.bar = function(conn, callback) {
-		callback(conn.req.params.id);
+	// handling POST request: POST events/bar
+	this.post_bar = function(req, res, callback) {
+		callback(req.params.id);
 	}
 
 The `callback` parameter allows you to serve your views in a number of easy ways:
 
 	// serving a view with dynamic content
-	this.dynamicView = function(conn, callback) {
+	this.get_dynamicView = function(req, res, callback) {
 	    callback(['dynamic',{name: "Road.js"}]);
 	}
 
 	// serving view with custom MIME type (default is text/html)
-	this.dynamicViewAsPlainText = function(conn, callback) {
+	this.get_dynamicViewAsPlainText = function(req, res, callback) {
 	    callback(['dynamic', {name:'Road.js'}], 'text/plain');
 	}
 
 	// serving plain text
-	this.plainText = function(conn, callback) {
+	this.get_plainText = function(req, res, callback) {
 	    callback('Plain text served as text/plain');
 	}
 

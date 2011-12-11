@@ -17,9 +17,11 @@ app.configure(function() {
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 
-	// use road to handle the routes this way:
-    app.use(express.router(road.router));
+    app.use(app.router);
 });
+
+// use road to handle the routes this way:
+road.router(app);
 
 app.error(function(err, req, res, next){
     console.error(err+err.message+err.stack);
