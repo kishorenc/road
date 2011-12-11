@@ -16,11 +16,11 @@ See example application for complete use cases.
 
 #Quick Start
 
-Integrating Road with your Express application is really simple. You need a simple route file with atleast the default route defined in your application root.
+Integrating Road with your Express application is really simple. You need a route file defined in your application root.
 
 	// routes.js (place this in your application root)
 	module.exports = [
-		['all', '/:controller?/:action?/:id?'] // default route
+		['map', 'get', '/testControllerShowMethod', 'index', 'custom'] // optional, this can be just empty
 	];
 
 Tell express to let Road handle the routing this way:
