@@ -10,7 +10,7 @@ var road = require('road');
 
 // configure road by specifying: 
 // view engine, application root, routes (see routes.js), and whether layout should be used
-road.configure('ejs', __dirname, require('./routes'), false);
+road.configure('ejs', __dirname, require('./routes'));
 
 app.configure(function() {
 	app.use(express.static(__dirname+'/public'));
