@@ -6,30 +6,30 @@
 
 // serving a static view
 this.get_index = function(req, res, callback) {
-    callback(['index']);
+    callback(null, 'index');
 }
 
 // serving a view with dynamic content
 this.get_dynamicView = function(req, res, callback) {
-    callback(['dynamic',{name: "Road.js"}]);
+    callback(null, 'dynamic', {name: "Road.js"});
 }
 
 // serving view with custom MIME type (default is text/html)
 this.get_dynamicViewAsPlainText = function(req, res, callback) {
-    callback(['dynamic', {name:'Road.js'}], 'text/plain');
+    callback(null, 'dynamic', {name:'Road.js'}, 'text/plain');
 }
 
 // serving plain text
 this.get_plainText = function(req, res, callback) {
-    callback('Plain text served as text/plain');
+    callback(null, {'text/plain': 'Plain text served as text/plain'});
 }
 
-// serving text in a custom MIME type (default is text/plain)
+// serving text as JavaScript
 this.get_plainTextAsJS = function(req, res, callback) {
-    callback('var foo = "bar";', 'application/javascript');
+    callback(null, {'application/javascript': 'var foo = "bar";'});
 }
 
 // custom URL mapping
 this.get_custom = function(req, res, callback) {
-	callback('custom URL mapping');
+	callback(null, {'text/plain': 'custom URL mapping'});
 }

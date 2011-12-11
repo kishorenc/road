@@ -43,34 +43,34 @@ You can export your controller functions which automatically get mapped by road,
 
 	// maps to: GET events/index or, just GET events/
 	this.get_index = function(req, res, callback) {
-    	callback('plain text');
+    	// ...
 	}
 
 	// maps to: GET events/foo/ or, GET events/foo/:id
 	this.get_foo = function(req, res, callback) {
-		callback('foo as plain text with optional id ' + req.params.id);
+		// ...
 	}
 
 	// handling POST request: POST events/bar
 	this.post_bar = function(req, res, callback) {
-		callback(req.params.id);
+		// ...
 	}
 
 The `callback` parameter allows you to serve your views in a number of easy ways:
 
 	// serving a view with dynamic content
 	this.get_dynamicView = function(req, res, callback) {
-	    callback(['dynamic',{name: "Road.js"}]);
+	    callback(null, 'dynamic', {name: "Road.js"});
 	}
 
 	// serving view with custom MIME type (default is text/html)
 	this.get_dynamicViewAsPlainText = function(req, res, callback) {
-	    callback(['dynamic', {name:'Road.js'}], 'text/plain');
+	    callback(null, 'dynamic', {name:'Road.js'}, 'text/plain');
 	}
 
 	// serving plain text
 	this.get_plainText = function(req, res, callback) {
-	    callback('Plain text served as text/plain');
+	    callback(null, {'text/plain': 'Plain text served as text/plain'});
 	}
 
 	// more use cases in example app
