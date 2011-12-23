@@ -3,21 +3,24 @@
 *   Make sure you have express, ejs, and (of course) road installed to run the example
 */
 
-var express = require('express'),
+var express = require('express'), 
+	road = require('road');
 	app = express.createServer();
-
-var road = require('road');
-
-// configure road by specifying: 
-// view engine, routes (see routes.js), and whether layout should be used
-road.configure('ejs', require('./routes'), false);
 
 app.configure(function() {
 	app.use(express.static(__dirname+'/public'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
-
     app.use(app.router);
+});
+
+/*  Configure road:
+*   view engine, routes (see routes.js), useLayout?, callback
+*/
+
+road.configure('ejs', require('./routes'), false, function(err, next) {
+	if(err) return next(err);
+	// do something ...
 });
 
 // use road to handle the routes this way:

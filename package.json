@@ -1,6 +1,6 @@
 {
     "name": "road",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "A route helper for express.",
     "homepage": "https://github.com/kishorenc/road",
     "author": "Kishore Nallan <kishore@kishorelive.com>",

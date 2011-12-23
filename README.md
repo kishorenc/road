@@ -1,6 +1,6 @@
 #Road - route helper for Express
 
-A route helper for express that allows you to map routes, controllers and views by following logical conventions. See example application for use cases. You need express and ejs available to run the example.
+A route helper for express that allows you to map routes, controllers and views by following logical conventions. See example application for use cases. You need express 2.x and ejs available to run the example.
 
 ##Installation
 
@@ -94,6 +94,15 @@ Road also supports custom routes.
 
 	];
 
+Finally, if you want to register a callback for Road to call when it's done rendering the view (or encounters an error), you can do so like this:
+
+	// Configure road:
+	// view engine, routes (see routes.js), useLayout?, callback
+	road.configure('ejs', require('./routes'), false, function(err, next) {
+		if(err) return next(err);
+		// do something ...
+	});
+	
 ##Todo
 
 	* Refer to issues
