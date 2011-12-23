@@ -98,7 +98,7 @@ Finally, if you want to register a callback for Road to call when it's done rend
 
 	// Configure road:
 	// view engine, routes (see routes.js), useLayout?, callback
-	road.configure('ejs', require('./routes'), false, function(err, next) {
+	road.configure('ejs', require('./routes'), false, function(err, req, res, next) {
 		if(err) return next(err);
 		// do something ...
 	});

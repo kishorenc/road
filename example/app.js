@@ -18,7 +18,7 @@ app.configure(function() {
 *   view engine, routes (see routes.js), useLayout?, callback
 */
 
-road.configure('ejs', require('./routes'), false, function(err, next) {
+road.configure('ejs', require('./routes'), false, function(err, req, res, next) {
 	if(err) return next(err);
 	// do something ...
 });
