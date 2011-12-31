@@ -102,6 +102,8 @@ Finally, if you want to register a callback for Road to call when it's done rend
 		if(err) return next(err);
 		// do something ...
 	});
+
+Road sets a `status` property on the `err` object to indicate the type of error. This can be used for rendering view with the correct HTTP status code. For missing controller or controller method, `err.status` is set to 404 (to indicate a missing resource), while any errors passed to Road from the controller is set to 500. If the error object already has a status set, Road does not override that.
 	
 ##Todo
 
