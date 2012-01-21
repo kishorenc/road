@@ -12,6 +12,11 @@ A route helper for express that allows you to map routes, controllers and views 
 	* Serve the views in custom MIME types
 	* Define custom routes which map custom URLs to specific controller methods
 	
+##Comptability
+
+	* Works on both node 0.4.x and 0.6.x
+	* Tested with Express 2.5.x
+	
 See example application for complete use cases.
 
 #Quick Start
