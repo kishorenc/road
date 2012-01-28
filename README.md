@@ -9,8 +9,9 @@ A route helper for express that allows you to map routes, controllers and views 
 ##Features
 
 	* Wire your routes to individual controllers and views using convention
+	* Define custom routes which map custom URLs to specific controller methods	
 	* Serve the views in custom MIME types
-	* Define custom routes which map custom URLs to specific controller methods
+	* View helper for serving JavaScript objects as application/json
 	
 ##Comptability
 
@@ -116,10 +117,16 @@ Finally, if you want to register a callback for Road to call when it's done rend
 
 Road sets a `status` property on the `err` object to indicate the type of error. This can be used for rendering view with the correct HTTP status code. For missing controller or controller method, `err.status` is set to 404 (to indicate a missing resource), while any errors passed to Road from the controller is set to 500. If the error object already has a status set, Road does not override that.
 	
-##Todo
+##Running the tests
 
-	* Refer to issues
+To run tests, first install the dev dependencies (ejs, mocha and request):
 
+	$ npm install
+	$ npm install -g mocha
+
+Run the tests from the test folder this way:
+
+	$ mocha test.js
 
 ##License
 

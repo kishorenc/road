@@ -7,20 +7,22 @@
     "contributors": [
         "Kishore Nallan <kishore@kishorelive.com>"
     ],
-    "repository":
-    {
+    "repository": {
         "type": "git",
         "url": "https://github.com/kishorenc/road"
     },
-    "bugs":
-    {
+    "devDependencies": {
+        "ejs": "*",
+        "mocha": "*",        
+        "request": "*"
+    },
+    "bugs": {
         "mail": "kishore@kishorelive.com",
         "url": "https://github.com/kishorenc/road/issues"
     },
     "main": "index.js",
     "engines": { "node": ">=0.4.0" },
-    "licenses" :
-    [
+    "licenses" : [
         { "type" : "MIT", "url" : "https://raw.github.com/kishorenc/road/master/LICENSE" }
     ]
 }

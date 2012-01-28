@@ -7,3 +7,4 @@ example/node_modules/*
 *.idea*
 *.iml
 *.module*
+node_modules

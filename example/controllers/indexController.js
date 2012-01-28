@@ -1,5 +1,5 @@
 /*
-*	Each controller method recieves `req`, `res` and `callback` as parameters. 
+*	Each controller method recieves `req`, `res` and `callback` as parameters.
 *   Although you have access to `res`, `callback` offers shortcuts for rendering the view
 *   (see examples below)
 */

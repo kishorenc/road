@@ -3,7 +3,7 @@
 *   Make sure you have express, ejs, and (of course) road installed to run the example
 */
 
-var express = require('express'), 
+var express = require('express'),
 	road = require('road');
 	app = express.createServer();
 
@@ -31,4 +31,4 @@ app.error(function(err, req, res, next){
     res.send('Error, or not found.');
 });
 
-app.listen(5000);
+module.exports = app;
