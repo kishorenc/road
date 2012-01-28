@@ -14,7 +14,8 @@
     "devDependencies": {
         "ejs": "*",
         "mocha": "*",        
-        "request": "*"
+        "request": "*",
+        "express": "2.5.4"
     },
     "bugs": {
         "mail": "kishore@kishorelive.com",
