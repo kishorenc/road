@@ -20,19 +20,14 @@ A route helper for express that allows you to map routes, controllers and views 
 	
 See example application for complete use cases.
 
-#Quick Start
+##Quick Start
 
-Integrating Road with your Express application is really simple. You need an empty route file defined in your application root.
-
-	// routes.js (place this in your application root)
-	module.exports = [];
-
-Tell express to let Road handle the routing this way:
+Integrating Road with your Express application is really simple. Tell Express to let Road handle the routing this way:
 
 	var road = require('road');
 
-	// configure road by specifying the view engine and the routes
-	road.configure('ejs', require('./routes'));
+	// configure road by specifying the view engine
+	road.configure('ejs');
 
 	// mount application routes using road
 	road.router(app);
@@ -43,7 +38,7 @@ Road, by convention, expects you to drop your controllers into the `controllers`
 		/indexController.js
 		/eventsController.js
 
-You can export your controller functions which automatically get mapped by road, again using convention. Every controller function needs to be prefixed with the HTTP method it's handling. For example, functions which are serving GET requests, need to be prefixed with 'get_', like this:
+You can export your controller functions which automatically get mapped by road, again using convention. Every controller function needs to be prefixed with the HTTP method it's handling. For example, functions which are serving GET requests, need to be prefixed with `get_`, like this:
 
 	// eventsController.js
 
@@ -57,12 +52,14 @@ You can export your controller functions which automatically get mapped by road,
 		// ...
 	}
 
+For handling a POST request, use `post_` prefix:
+
 	// handling POST request: POST events/bar
 	this.post_bar = function(req, res, callback) {
 		// ...
 	}
 
-The `callback` parameter allows you to serve your views in a number of easy ways:
+The controller method's `callback` parameter allows you to serve your views in a number of easy ways:
 
 	// serving a view with dynamic content
 	this.get_dynamicView = function(req, res, callback) {
@@ -85,7 +82,7 @@ The `callback` parameter allows you to serve your views in a number of easy ways
 	    callback(null, {'json': obj});
 	}
 
-	// more use cases in example app
+	// for more use cases, see the example app
 
 Place your views in `/views` in app root. Each controller gets its own sub-directory inside `views`. For example, if you have a `show` method in your `fooController.js`, accessing `foo/show` will make Road look for the template file `views/foo/show.ejs`.
 
@@ -96,15 +93,27 @@ Place your views in `/views` in app root. Each controller gets its own sub-direc
 		/foo
 			/show.ejs
 
-Road also supports custom routes.
+##Routing rules
 
-	// routes.js
+Road supports the following route by default:
+
+	/:controller?/:action?/:id?
+
+To define custom routes, place a route file in your application root:
+
+	// routes.js (place this in your application root)
 	module.exports = [
 		
-		// routes `/path/to/foo` to `get_show()` method in `fooController`
-		['map', 'get', '/path/to/foo', 'foo', 'show'],
+		// routes `/path/to/foo` to `get_show()` method of `fooController`
+		['map', 'get', '/path/to/foo/:id', 'foo', 'show'],
 
 	];
+
+When you configure Road, you can also pass these routes:
+
+	road.configure('ejs', require('./routes');
+
+##Registering a callback
 
 Finally, if you want to register a callback for Road to call when it's done rendering the view (or encounters an error), you can do so like this:
 
@@ -116,7 +125,16 @@ Finally, if you want to register a callback for Road to call when it's done rend
 	});
 
 Road sets a `status` property on the `err` object to indicate the type of error. This can be used for rendering view with the correct HTTP status code. For missing controller or controller method, `err.status` is set to 404 (to indicate a missing resource), while any errors passed to Road from the controller is set to 500. If the error object already has a status set, Road does not override that.
-	
+
+##Configuration options
+
+**road.configure(viewEngine, [routes, useLayout, callback])**
+
+* `viewEngine`: The view engine to be used for rendering the views, e.g. ejs, jade
+* `routes`: (optional) array with custom routing rules (see below for more details)
+* `useLayout`: (optional) specify whether a layout should be used while rendering the view
+* `callback`: (optional) this callback will be fired when Road is done with its job
+
 ##Running the tests
 
 To run tests, first install the dev dependencies (ejs, mocha and request):
