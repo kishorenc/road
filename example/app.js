@@ -18,13 +18,17 @@ app.configure(function() {
 *   view engine, routes (see routes.js), useLayout?, callback
 */
 
-road.configure('ejs', require('./routes'), false, function(err, req, res, next) {
-	if(err) return next(err);
-	// do something ...
-});
+road.configure('ejs', require('./routes'), false, roadCallback);
 
 // use road to handle the routes this way:
 road.router(app);
+
+function roadCallback(err, req, res, next) {
+	console.log(err, req, res, next);
+
+	if(err) return next(err);
+	// else do something, maybe invoke the next middleware...
+}
 
 app.error(function(err, req, res, next){
     console.error(err+err.message+err.stack);
