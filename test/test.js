@@ -65,12 +65,40 @@ describe('Routing with GET', function() {
         done();
       });
     });
+});
 
-    it('should serve a view with custom URL mapping defined in routes.js', function(done) {
+describe('Custom URL mapping defined in routes.js', function() {
+    before(function() {
+      app.listen(port);
+    });
+
+    after(function() {
+      app.close();
+    });
+
+    it('should GET /customPath', function(done) {
       request(rootUrl+'customPath', function(err, res, body) {
         if(err) throw err;
         assert.equal(res.headers['content-type'], 'text/plain');
         assert.equal(body, 'custom URL mapping');
+        done();
+      });
+    });
+
+    it('should POST /customPath/:id', function(done) {
+      request.post(rootUrl+'customPath/32', function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.headers['content-type'], 'text/plain');
+        assert.equal(body, '32');
+        done();
+      });
+    });
+
+    it('should POST /customPath/:id/latest', function(done) {
+      request(rootUrl+'customPath/36/latest', function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.headers['content-type'], 'text/plain');
+        assert.equal(body, '36/latest');
         done();
       });
     });
@@ -87,7 +115,7 @@ describe('POST, PUT & DELETE using req.params.id', function() {
     });
 
     it('returns the :id sent to it via POST', function(done) {
-      request.post(rootUrl+'foo/baz/42', function(err, res, body) {
+      request.post(rootUrl+'foo/42/baz', function(err, res, body) {
         if(err) throw err;
         assert.equal(res.headers['content-type'], 'text/plain');
         assert.equal(body, '42');
@@ -96,7 +124,7 @@ describe('POST, PUT & DELETE using req.params.id', function() {
     });
 
     it('returns the :id sent to it via PUT', function(done) {
-      request.put(rootUrl+'foo/baz/42', function(err, res, body) {
+      request.put(rootUrl+'foo/42/baz', function(err, res, body) {
         if(err) throw err;
         assert.equal(res.headers['content-type'], 'text/plain');
         assert.equal(body, '42');
@@ -105,7 +133,7 @@ describe('POST, PUT & DELETE using req.params.id', function() {
     });
 
     it('returns the :id sent to it via DELETE', function(done) {
-      request.del(rootUrl+'foo/baz/42', function(err, res, body) {
+      request.del(rootUrl+'foo/42/baz', function(err, res, body) {
         if(err) throw err;
         assert.equal(res.headers['content-type'], 'text/plain');
         assert.equal(body, '42');

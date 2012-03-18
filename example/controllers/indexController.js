@@ -30,8 +30,17 @@ this.get_plainTextAsJS = function(req, res, callback) {
 };
 
 // custom URL mapping
+
 this.get_custom = function(req, res, callback) {
 	callback(null, {'text/plain': 'custom URL mapping'});
+};
+
+this.post_custom = function(req, res, callback) {
+	callback(null, {'text/plain': req.params.id});
+};
+
+this.get_customLatest = function(req, res, callback) {
+	callback(null, {'text/plain': req.params.id+'/latest'});
 };
 
 // serve JSON
