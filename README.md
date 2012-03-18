@@ -165,10 +165,12 @@ Road sets a `status` property on the callback's `err` argument to indicate the t
 
 * Deprecated use of keyword 'map' as the first element in route mapping array. A route mapping is now simply defined as:
     
+    ``` javascript
     // routes.js
     module.exports = [
         ['get', '/customPath', 'controllerName', 'methodName'],
     ]
+    ```
 
 * `road.configure()` now takes a configuration object.
 * `road.use()` is deprecated. To initialize Road, simply pass it to Express this way: `app.use(express.router(road));` 
