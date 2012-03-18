@@ -7,21 +7,20 @@ var express = require('express'),
 	road = require('road');
 	app = express.createServer();
 
-app.configure(function() {
-	app.use(express.static(__dirname+'/public'));
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-    app.use(app.router);
+
+road.configure({
+    viewEngine: 'ejs',
+    routes: require('./routes'),
+    useLayout: false,
+    callback: roadCallback
 });
 
-/*  Configure road:
-*   view engine, routes (see routes.js), useLayout?, callback
-*/
-
-road.configure('ejs', require('./routes'), false, roadCallback);
-
-// use road to handle the routes this way:
-road.router(app);
+app.configure(function() {
+    app.use(express.static(__dirname+'/public'));
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+    app.use(express.router(road));
+});
 
 function roadCallback(err, req, res, next) {
 	console.log(err, req, res, next);
