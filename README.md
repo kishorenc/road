@@ -17,6 +17,10 @@ A route helper for express that allows you to map routes, controllers and views 
 
 	* Works on both node 0.4.x and 0.6.x
 	* Tested with Express 2.5.x
+
+##Changes in v0.3.x
+
+Road 0.3.x breaks compatibility with 0.2.x with a number of API changes. To upgrade from 0.2.8, see the bottom of this page.
 	
 See example application for complete use cases.
 
@@ -87,7 +91,6 @@ this.get_jsonResponse = function(req, res, callback) {
 }
 
 // for more use cases, see the example app
-
 ```
 
 ##View files
@@ -157,6 +160,19 @@ road.configure({callback: roadCallback});
 ```
 
 Road sets a `status` property on the callback's `err` argument to indicate the type of error. This can be used for rendering an appropriate view with the correct HTTP status code. For missing controller or controller methods, `err.status` is set to 404 (to indicate a missing resource), while any other error passed to Road from a controller method is set to 500. If the error object already has a status set, Road does not override that.
+
+##Upgrading to v0.3.0 from v0.2.8
+
+* Deprecated use of keyword 'map' as the first element in route mapping array. A route mapping is now simply defined as:
+    
+    // routes.js
+    module.exports = [
+        ['get', '/customPath', 'controllerName', 'methodName'],
+    ]
+
+* `road.configure()` now takes a configuration object.
+* `road.use()` is deprecated. To initialize Road, simply pass it to Express this way: `app.use(express.router(road));` 
+* Changed the default route convention from `controller/:action/:id` to `controller/:id/:action`
 
 ##Running the tests
 
