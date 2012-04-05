@@ -248,3 +248,55 @@ describe('Callback passed to road', function() {
       request(rootUrl+'foo2/bar');
     });
 });
+
+describe('Redirection', function() {
+    before(function() {
+      app.listen(port);
+    });
+
+    after(function() {
+      app.close();
+    });
+
+    it('should redirect by default returns 302 as status code', function(done) {
+      request.get({url: rootUrl+'foo/redirectDefault', followRedirect: false}, function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 302);
+        done();
+      });
+    });
+
+    it('should send 302 redirect to the correct page', function(done) {
+      request(rootUrl+'foo/redirectDefault', function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 200);
+        assert.equal(body, 'target page');
+        done();
+      });
+    });
+
+    it('should redirect when explicitly specifying 302', function(done) {
+      request.get({url: rootUrl+'foo/redirectWith302', followRedirect: false}, function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 302);
+        done();
+      });
+    });
+
+    it('should have a status code of 301', function(done) {
+      request.get({url: rootUrl+'foo/redirectWith301', followRedirect: false}, function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 301);
+        done();
+      });
+    });
+
+    it('should serve the correct page when performing 301 redirect', function(done) {
+      request(rootUrl+'foo/redirectWith301', function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 200);
+        assert.equal(body, 'target page');
+        done();
+      });
+    });
+});

@@ -22,3 +22,19 @@ this.put_baz = function(req, res, callback) {
 this.delete_baz = function(req, res, callback) {
 	callback(null, {'text/plain': req.params.id});
 };
+
+this.get_redirectTarget = function(req, res, callback) {
+	callback(null, {'text/plain': 'target page'});
+};
+
+this.get_redirectDefault = function(req, res, callback) {
+	callback(null, {'redirect': '/foo/redirectTarget'});
+};
+
+this.get_redirectWith302 = function(req, res, callback) {
+	callback(null, {'redirect': '/foo/redirectTarget'}, 302);
+};
+
+this.get_redirectWith301 = function(req, res, callback) {
+	callback(null, {'redirect': '/foo/redirectTarget'}, 301);
+};
