@@ -93,6 +93,29 @@ this.get_jsonResponse = function(req, res, callback) {
 // for more use cases, see the example app
 ```
 
+##Content negotation
+
+Road provides a basic mechanism for content negotiation through the use of extension names. If a particular URL is called with an extension, `req.format` property is set the value of the extension. For example, when `foo/show.json` is called, the value of `req.format` will be `json'. Based on this, we can serve different content:
+
+``` javascript
+this.get_contentNegotiation = function(req, res, callback) {
+	var names = ['Jack', 'Jane'];
+	switch(req.format) {
+		case 'json':
+			callback(null, {'json': names});
+			break;
+		case 'html':
+			var html = '<strong>Jack, Jane</strong>';
+			callback(null, {'text/html': html});
+			break;
+		default:
+			callback(new Error('Unsupported content type.'));
+	}
+};
+```
+
+If the URL is not called with any extension, `req.format` is by default set to `html`.
+
 ##Redirection
 
 Road also provides a helper for redirection:
