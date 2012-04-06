@@ -155,7 +155,7 @@ To define custom routes, place a route file in your application's root. Any rout
 module.exports = [
 	
 	// routes `/path/to/foo` to `get_show()` method of `fooController`
-	['map', 'get', '/path/to/foo/:id', 'foo', 'show'],
+	['get', '/path/to/foo/:id', 'foo', 'show'],
 
 ];
 ```
