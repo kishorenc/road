@@ -1,5 +1,5 @@
 /*
-*	Each controller method recieves `req`, `res` and `callback` as parameters.
+* Each controller method recieves `req`, `res` and `callback` as parameters.
 *   Although you have access to `res`, `callback` offers shortcuts for rendering the view
 *   (see examples below)
 */
@@ -32,22 +32,22 @@ this.get_plainTextAsJS = function(req, res, callback) {
 // custom URL mapping
 
 this.get_custom = function(req, res, callback) {
-	callback(null, {'text/plain': 'custom URL mapping'});
+  callback(null, {'text/plain': 'custom URL mapping'});
 };
 
 this.post_custom = function(req, res, callback) {
-	callback(null, {'text/plain': req.params.id});
+  callback(null, {'text/plain': req.params.id});
 };
 
 this.get_customLatest = function(req, res, callback) {
-	callback(null, {'text/plain': req.params.id+'/latest'});
+  callback(null, {'text/plain': req.params.id+'/latest'});
 };
 
 // serve JSON
 this.get_jsonResponse = function(req, res, callback) {
-	var obj = {
-		foo: 'bar',
-		baz: [1,2,3]
-	};
-	callback(null, {'json': obj});
+  var obj = {
+    foo: 'bar',
+    baz: [1,2,3]
+  };
+  callback(null, {'json': obj});
 };

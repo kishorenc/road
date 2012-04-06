@@ -1,9 +1,9 @@
 process.chdir('../example');
 
 var road = require('../'),
-  app = require('../example/app'),
-  request = require('request'),
-  assert = require('assert');
+    app = require('../example/app'),
+    request = require('request'),
+    assert = require('assert');
 
 var port = 3456,
     rootUrl = 'http://localhost:3456/';
