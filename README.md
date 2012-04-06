@@ -93,6 +93,25 @@ this.get_jsonResponse = function(req, res, callback) {
 // for more use cases, see the example app
 ```
 
+##Redirection
+
+Road also provides a helper for redirection:
+
+``` javascript
+// redirect a request to this controller method to the URL '/foo/redirectTarget'
+this.get_redirectDefault = function(req, res, callback) {
+	callback(null, {'redirect': '/foo/redirectTarget'});
+};
+```
+
+Redirections are 302 by default, but you can also explicitly specify a 301 redirect:
+
+``` javascript
+this.get_redirectWith301 = function(req, res, callback) {
+	callback(null, {'redirect': '/foo/redirectTarget'}, 301);
+};
+```
+
 ##View files
 
 Place your view files in `/views` directory in your application's root. Each controller gets its own sub-directory inside `views`. For example, if you have a `show` method in your `fooController.js`, accessing `foo/show` will make Road look for the template file `views/foo/show.ejs`.
