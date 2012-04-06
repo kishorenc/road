@@ -300,3 +300,44 @@ describe('Redirection', function() {
       });
     });
 });
+
+describe('Content negotiation', function() {
+    before(function() {
+      app.listen(port);
+    });
+
+    after(function() {
+      app.close();
+    });
+
+    it('should return JSON response', function(done) {
+      request(rootUrl+'foo/contentNegotiation.json', function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 200);
+        assert.equal(body, '["Jack","Jane"]');
+        done();
+      });
+    });
+    
+    it('should return HTML response', function(done) {
+      request(rootUrl+'foo/contentNegotiation', function(err, res, body) {
+        if(err) throw err;
+        assert.equal(res.statusCode, 200);
+        assert.equal(body, '<strong>Jack, Jane</strong>');
+        done();
+      });
+    });
+
+    it('should return a 404', function(done) {
+      console.error = function() {};
+      console.log = function(err, req, res, next) {
+        assert.ok(err !== null);
+        assert.ok(err.status === 404);
+        assert.ok(req !== undefined);
+        assert.ok(res !== undefined);
+        assert.ok(next !== undefined);
+        done();
+      };
+      request(rootUrl+'foo/contentNegotiation.txt');
+    });
+});

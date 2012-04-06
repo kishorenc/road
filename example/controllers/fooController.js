@@ -38,3 +38,18 @@ this.get_redirectWith302 = function(req, res, callback) {
 this.get_redirectWith301 = function(req, res, callback) {
 	callback(null, {'redirect': '/foo/redirectTarget'}, 301);
 };
+
+this.get_contentNegotiation = function(req, res, callback) {
+	var names = ['Jack', 'Jane'];
+	switch(req.format) {
+		case 'json':
+			callback(null, {'json': names});
+			break;
+		case 'html':
+			var html = '<strong>Jack, Jane</strong>';
+			callback(null, {'text/html': html});
+			break;
+		default:
+			callback(new Error('Unsupported content type.'));
+	}
+};
