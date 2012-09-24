@@ -5,6 +5,7 @@ var road = require('../'),
     request = require('request'),
     assert = require('assert');
 
+var server;
 var port = 3456,
     rootUrl = 'http://localhost:3456/';
 
@@ -22,11 +23,11 @@ afterEach(function() {
 describe('Routing with GET', function() {
   
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
-      app.close();
+      server.close();
     });
 
     it('should call index method of index controller', function(done){
@@ -69,11 +70,11 @@ describe('Routing with GET', function() {
 
 describe('Custom URL mapping defined in routes.js', function() {
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
-      app.close();
+      server.close();
     });
 
     it('should GET /customPath', function(done) {
@@ -107,11 +108,11 @@ describe('Custom URL mapping defined in routes.js', function() {
 describe('POST, PUT & DELETE using req.params.id', function() {
   
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
-      app.close();
+      server.close();
     });
 
     it('returns the :id sent to it via POST', function(done) {
@@ -146,11 +147,11 @@ describe('POST, PUT & DELETE using req.params.id', function() {
 describe('Content Types', function() {
   
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
-      app.close();
+      server.close();
     });
 
     it('should serve a view with custom MIME type (text/plain)', function(done) {
@@ -186,12 +187,12 @@ describe('Handle undefined routes', function() {
   
     before(function() {
       console.error = function() {};
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
       console.error = consoleError;
-      app.close();
+      server.close();
     });
 
     it('should return an error when an non-existent controller is called', function(done) {
@@ -216,12 +217,12 @@ describe('Handle undefined routes', function() {
 describe('Callback passed to road', function() {
     
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
       console.error = consoleError;
-      app.close();
+      server.close();
     });
 
     it('should invoke the callback after view rendering is done', function(done) {
@@ -251,11 +252,11 @@ describe('Callback passed to road', function() {
 
 describe('Redirection', function() {
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
-      app.close();
+      server.close();
     });
 
     it('should redirect by default returns 302 as status code', function(done) {
@@ -303,11 +304,11 @@ describe('Redirection', function() {
 
 describe('Content negotiation', function() {
     before(function() {
-      app.listen(port);
+      server = app.listen(port);
     });
 
     after(function() {
-      app.close();
+      server.close();
     });
 
     it('should return JSON response', function(done) {

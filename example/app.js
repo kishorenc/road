@@ -5,8 +5,7 @@
 
 var express = require('express'),
     road = require('road');
-    app = express.createServer();
-
+    app = express();
 
 road.configure({
     viewEngine: 'ejs',
@@ -19,9 +18,12 @@ app.configure(function() {
     app.use(express.static(__dirname+'/public'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-    app.use(express.router(road));
+    app.use(app.router);
+    app.use(onError);
 });
 
+// initialize road
+road(app);
 
 function roadCallback(err, req, res, next) {
     console.log(err, req, res, next);
@@ -30,9 +32,9 @@ function roadCallback(err, req, res, next) {
     // else do something, maybe invoke the next middleware...
 }
 
-app.error(function(err, req, res, next){
+function onError(err, req, res, next){
     console.error(err+err.message+err.stack);
     res.send('Error, or not found.');
-});
+};
 
 module.exports = app;
