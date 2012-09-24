@@ -1,10 +1,14 @@
 #Road - route helper for Express
 
-A route helper for express that allows you to map routes, controllers and views by following logical conventions. See example application for use cases. You need express 2.x and ejs available to run the example.
+A route helper for express that allows you to map routes, controllers and views by following logical conventions. See example application for use cases. You need Express 3.x or Express 2.x and ejs available to run the example.
 
 ##Installation
 
 	npm install road
+
+## Express 3.x
+
+The following guide is for Express 3.x. If you using Express 2.x, please refer to the `0.3` branch for instructions.
 
 ##Features
 
@@ -13,10 +17,13 @@ A route helper for express that allows you to map routes, controllers and views 
 	* Serve the views in custom MIME types
 	* View helper for serving JavaScript objects as application/json
 	
-##Comptability
+##Compatibility
 
-	* Works on both node 0.4.x and 0.6.x
-	* Tested with Express 2.5.x
+	* Tested with Express 3.x and Express 2.x
+
+##v0.4.0
+
+Road 0.4.x is compatible with Express 3.x. Road also works on Express 2.x, but you have to check the `0.3` branch for instructions.
 
 ##Changes in v0.3.x
 
@@ -26,13 +33,15 @@ See example application for complete use cases.
 
 ##Quick Start
 
-Integrating Road with your Express application is really simple. Tell Express to let Road handle the routing this way:
+Integrating Road with your Express application is really simple.
 
 ``` javascript
-var road = require('road');
+// create an express app
+var app = express();
 
-// mount application routes using road
-app.use(express.router(road));
+// initialize road this way
+var road = require('road');
+road(app);
 ```
 
 Road, by convention, expects you to drop your controllers into the `controllers` folder in your application root. 
@@ -233,7 +242,7 @@ Run the tests from the test folder this way:
 
 (The MIT License)
 
-Copyright (c) 2011 Kishore Nallan  <kishore@kishorelive.com>
+Copyright (c) 2011-2012 Kishore Nallan  <kishore@kishorelive.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
